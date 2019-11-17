@@ -1,7 +1,10 @@
-database = {}
+import xml.etree.ElementTree as DOM
+database = ''
 
-def Start(username, password, action):
-    populate_database()
+def Start(username, password, action=""):
+
+    if database:
+        populate_database()
 
     if "L" in action:
         return Login(username, password)
@@ -29,6 +32,10 @@ def Forgot(username):
 
 def populate_database():
     global database
+    database = DOM.parse('database.xml')
+    root = database.getroot()
+    return root
+
     with open("database.txt") as file:
         for line in file:
             (key, val) = line.split()

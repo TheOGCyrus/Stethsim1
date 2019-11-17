@@ -1,6 +1,7 @@
-from xml.dom import minidom
+# from xml.dom import minidom
 import xml.etree.ElementTree as DOM
 
+database = 'database.xml'
 
 def Start():
     return
@@ -20,6 +21,9 @@ def Save():
     return
 
 def Load():
-    return
+    database = DOM.parse('database.xml')
+    root = database.getroot()
+    return root
 
 Save()
+print(DOM.tostring(Load()).decode())

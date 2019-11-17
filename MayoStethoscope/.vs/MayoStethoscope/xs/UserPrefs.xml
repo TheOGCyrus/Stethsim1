@@ -1,7 +1,7 @@
 ﻿<Properties StartupConfiguration="{E305E6DE-4541-DAF4-355B-CB07B75A40A1}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/menuManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LoginManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/LoginManager.cs" Line="16" Column="9" />
+      <File FileName="Assets/Scripts/LoginManager.cs" Line="32" Column="40" />
       <File FileName="Assets/Scripts/menuManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
