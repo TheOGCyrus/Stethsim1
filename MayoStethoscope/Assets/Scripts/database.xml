@@ -1,1 +1,1 @@
-<UserProfiles><User Password="123" Username="Matt" /><User Password="000" Username="Mick" /></UserProfiles>
+<Database><UserProfiles><User DoB="06/04/1999" Password="newpass" Username="Matt" /><User DoB="01/01/2001" Password="qwe" Username="Mick" /><User DoB="04/06/2001" Password="000" Username="Will" /><User DoB="11/11/2011" Password="Pass," Username="User," /></UserProfiles></Database>
