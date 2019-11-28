@@ -41,42 +41,28 @@ public class LoginManager : MonoBehaviour
 
     void LoginOnClick()
     {
-        if (PageStatus != "L")
-        {
-            PageStatus = "L";
-            StateChange();
-        }
 
         Debug.Log("Login Clicked ...");
+        Debug.Log("Page Status " + PageStatus);
 
-        string username = UsernameTextBox.text;
-        string password = PasswordTextBox.text;
-
-        String output = RunPython(username, password, PageStatus, "06/04/1999");
-        if (output == "True")
+        if (PageStatus == "L")
         {
-            LoginView.SetActive(false);
+            string username = UsernameTextBox.text;
+            string password = PasswordTextBox.text;
+            String output = RunPython(username, password, PageStatus, "");
+
+            if (output == "True")
+            {
+                LoginView.SetActive(false);
+            }
+            else
+            {
+                UsernameTextBox.text = "";
+                PasswordTextBox.text = "";
+                ErrorText.text = output;
+            }
         }
-        else
-        {
-            UsernameTextBox.text = "";
-            PasswordTextBox.text = "";
-            ErrorText.text = output;
-        }
-
-    }
-
-    void CreateOnClick()
-    {
-        if (PageStatus != "C")
-        {
-            PageStatus = "C";
-            StateChange();
-        }
-
-        Debug.Log("Create Clicked ...");
-
-        while (true)
+        else if (PageStatus == "C")
         {
             String username = UsernameTextBox.text;
             String password = PasswordTextBox.text;
@@ -90,13 +76,63 @@ public class LoginManager : MonoBehaviour
                     Match dob_match = re_date.Match(dob);
                     if (dob_match.Success)
                     {
-                        RunPython(username, password, "C", dob);
-                        return;
+                        String output = RunPython(username, password, PageStatus, dob);
+                        if (output == "True")
+                        {
+                            LoginView.SetActive(false);
+                        }
+                        else
+                        {
+                            UsernameTextBox.text = "";
+                            PasswordTextBox.text = "";
+                            MiscTextBox1.text = "";
+                            MiscTextBox2.text = "";
+                            ErrorText.text = output;
+                        }
                     }
                 }
             }
-
         }
+        else if (PageStatus == "F")
+        {
+            String username = UsernameTextBox.text;
+            String password = PasswordTextBox.text;
+            String confirm = MiscTextBox1.text;
+            String dob = MiscTextBox2.text;
+
+            Match dob_match = re_date.Match(dob);
+            if (dob_match.Success)
+            {
+                if (password == confirm)
+                {
+                    String output = RunPython(username, password, PageStatus, dob);
+                    if (output == "True")
+                    {
+                        LoginView.SetActive(false);
+                    }
+                    else
+                    {
+                        UsernameTextBox.text = "";
+                        PasswordTextBox.text = "";
+                        MiscTextBox1.text = "";
+                        MiscTextBox2.text = "";
+                        ErrorText.text = output;
+                    }
+                }
+            }
+        }
+
+    } //end void LoginOnClick
+
+    void CreateOnClick()
+    {
+        if (PageStatus != "C")
+        {
+            PageStatus = "C";
+            StateChange();
+        }
+
+        Debug.Log("Create Clicked ...");
     }
 
     void ForgotOnClick()
@@ -106,6 +142,7 @@ public class LoginManager : MonoBehaviour
             PageStatus = "F";
             StateChange();
         }
+
         Debug.Log("Forgot Clicked ...");
     }
 
@@ -125,48 +162,73 @@ public class LoginManager : MonoBehaviour
     {
         if (PageStatus == "L")
         {
+            UsernameTextBox.gameObject.SetActive(true);
+            UsernameTextBox.text = "";
+            UsernameTextBox.placeholder.GetComponent<Text>().text = "Enter your username here ...";
+            PasswordTextBox.gameObject.SetActive(true);
+            PasswordTextBox.text = "";
+            PasswordTextBox.placeholder.GetComponent<Text>().text = "Enter your password here ...";
+            PasswordTextBox.contentType = InputField.ContentType.Password;
+
+            Vector3 pos = LoginButton.GetComponent<RectTransform>().anchoredPosition;
+            pos.y = -110;
+            LoginButton.GetComponent<RectTransform>().anchoredPosition = pos;
+            LoginButton.GetComponentInChildren<Text>().text = "Login";
             MiscTextBox1.gameObject.SetActive(false);
             MiscTextBox2.gameObject.SetActive(false);
             CreateAccount.gameObject.SetActive(true);
             ForgotPassword.gameObject.SetActive(true);
-            //LoginButton.transform.position.x = -110;
-            //MiscTextBox1.SetActive(false);
-            //MiscTextBox2.SetActive(false);
-            //CreateAccount.SetActive(true);
-            //ForgotPassword.SetActive(true);
-            //LoginButton.transform.position.x = -110;
+            CancelButton.gameObject.SetActive(false);
         }
         else if (PageStatus == "C")
         {
+            UsernameTextBox.gameObject.SetActive(true);
+            UsernameTextBox.text = "";
+            UsernameTextBox.placeholder.GetComponent<Text>().text = "Enter your username here ...";
+            PasswordTextBox.gameObject.SetActive(true);
+            PasswordTextBox.text = "";
+            PasswordTextBox.placeholder.GetComponent<Text>().text = "Enter your password here ...";
+            PasswordTextBox.contentType = InputField.ContentType.Password;
+
+            Vector3 pos = LoginButton.GetComponent<RectTransform>().anchoredPosition;
+            pos.y = -190;
+            LoginButton.GetComponent<RectTransform>().anchoredPosition = pos;
+            LoginButton.GetComponentInChildren<Text>().text = "Create Account";
             MiscTextBox1.gameObject.SetActive(true);
-            //MiscTextBox1.placeholder.text = "Reenter your password here ...";
+            MiscTextBox1.text = "";
+            MiscTextBox1.placeholder.GetComponent<Text>().text = "Confirm your password here ...";
+            MiscTextBox1.contentType = InputField.ContentType.Password;
             MiscTextBox2.gameObject.SetActive(true);
-            //MiscTextBox2.placeholder.text = "Enter your date of birth, eg. MM/DD/YYYY ...";
+            MiscTextBox2.text = "";
+            MiscTextBox2.placeholder.GetComponent<Text>().text = "Enter your date of birth, eg. MM/DD/YYYY ...";
             CreateAccount.gameObject.SetActive(false);
             ForgotPassword.gameObject.SetActive(false);
-            //LoginButton.transform.position.x = -190;
             CancelButton.gameObject.SetActive(true);
-            //MiscTextBox1.SetActive(true);
-            //MiscTextBox1.placeholder.text = "Reenter your password here ...";
-            //MiscTextBox2.SetActive(true);
-            //MiscTextBox2.placeholder.text = "Enter your date of birth, eg. MM/DD/YYYY ...";
-            //CreateAccount.SetActive(false);
-            //ForgotPassword.SetActive(false);
-            //LoginButton.transform.position.x = -190;
-            //CancelButton.SetActive(true);
         }
         else if (PageStatus == "F")
         {
-            //UsernameTextBox.placeholder.text = "Enter your date of birth, eg. MM/DD/YYYY ...";
-            PasswordTextBox.gameObject.SetActive(false);
+            UsernameTextBox.gameObject.SetActive(true);
+            UsernameTextBox.text = "";
+            UsernameTextBox.placeholder.GetComponent<Text>().text = "Enter your username here ...";
+            PasswordTextBox.gameObject.SetActive(true);
+            PasswordTextBox.text = "";
+            PasswordTextBox.placeholder.GetComponent<Text>().text = "Enter your new password here ...";
+            PasswordTextBox.contentType = InputField.ContentType.Password;
+
+            Vector3 pos = LoginButton.GetComponent<RectTransform>().anchoredPosition;
+            pos.y = -190;
+            LoginButton.GetComponent<RectTransform>().anchoredPosition = pos;
+            LoginButton.GetComponentInChildren<Text>().text = "Reset Password";
+            MiscTextBox1.gameObject.SetActive(true);
+            MiscTextBox1.text = "";
+            MiscTextBox1.placeholder.GetComponent<Text>().text = "Confirm your new password here ...";
+            MiscTextBox1.contentType = InputField.ContentType.Password;
+            MiscTextBox2.gameObject.SetActive(true);
+            MiscTextBox2.text = "";
+            MiscTextBox2.placeholder.GetComponent<Text>().text = "Enter your date of birth, eg. MM/DD/YYYY ...";
             CreateAccount.gameObject.SetActive(false);
             ForgotPassword.gameObject.SetActive(false);
             CancelButton.gameObject.SetActive(true);
-            //UsernameTextBox.placeholder.text = "Enter your date of birth, eg. MM/DD/YYYY ...";
-            //PasswordTextBox.SetActive(false);
-            //CreateAccount.SetActive(false);
-            //ForgotPassword.SetActive(false);
-            //CancelButton.SetActive(true);
         }
     }
 

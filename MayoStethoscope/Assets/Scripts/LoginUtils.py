@@ -31,7 +31,7 @@ def Login(username, password):
     # if username in database.keys():
     #     if password == database[password]:
     #         return "True"
-    return "False"
+    return "Username or password incorrect. Please try again."
 
 def Create(username, password, dob):
     global database
@@ -56,7 +56,7 @@ def Create(username, password, dob):
     # file = open("database.xml", "w")
     # file.write(data)
 
-    return "False"
+    return "User already exists. Please login or try resetting your password."
 
 
     # if username not in database.keys():
@@ -81,7 +81,7 @@ def Forgot(username, dob):
     # if username in database.keys():
     #     if password == database[password]:
     #         return "True"
-    return "False"
+    return "Password reset failed. The birthdate given may have been incorrect."
 
 # def populate_database():
 #     global database
