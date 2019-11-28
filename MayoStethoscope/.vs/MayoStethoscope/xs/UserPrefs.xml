@@ -1,8 +1,8 @@
 ﻿<Properties StartupConfiguration="{E305E6DE-4541-DAF4-355B-CB07B75A40A1}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LoginManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/LoginManager.cs" Line="57" Column="28" />
-      <File FileName="Assets/Scripts/menuManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/LoginManager.cs" Line="91" Column="1" />
+      <File FileName="Assets/Scripts/menuManager.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -10,18 +10,13 @@
           <Node name="MayoStethoscope" expanded="True" selected="True" />
         </State>
       </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="5174bbdc-673e-4e9c-bae3-f0f77d994196" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="d662fe1b-a9c7-4abc-8497-57f6bbca0e7a" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/cyrus_silvermist/Documents/GitHub/Stethsim1/MayoStethoscope/Assets/Scripts/LoginManager.cs" relfile="Assets/Scripts/LoginManager.cs" line="31" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>

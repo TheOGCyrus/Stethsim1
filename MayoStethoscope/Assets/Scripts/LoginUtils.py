@@ -1,3 +1,5 @@
+#!/Documents/GitHub/Stethsim1/MayoStethoscope/Assets/Resources python
+
 import xml.etree.ElementTree as DOM
 import xml.dom.minidom
 from sys import argv
@@ -108,7 +110,7 @@ def GetUserByUsername(user_profiles, username):
             return user
     return None
 
-# Start("Matt", "123", "C", "06/04/1999")
+# print(Start("", "", "L", ""))
 # Start("Matt", "123", "C", "04/06/1999")
 # Start("Mick", "qwe", "C", "01/01/2001")
 # Start("Will", "000", "C", "04/06/2001")
@@ -134,7 +136,11 @@ def GetUserByUsername(user_profiles, username):
 # print(data)
 
 # print(*argv[1:])
+
 print(Start(*argv[1:]), flush=True)
+file = open("output.txt", "w")
+data = Start(*argv[1:]) + "\n" + str(argv[1:])
+file.write(data)
 
 # root = database.getroot()
 # DatabaseUtils.printprettyDB(root)
